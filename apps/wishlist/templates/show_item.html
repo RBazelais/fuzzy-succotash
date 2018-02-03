@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{%  block content %}
+
+<main>
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
+            <a href="#">Home</a>
+            <button type="submit" class="btn btn-outline-success my-2 my-sm-0">
+                <a href="/logout">Logout</a>
+            </button>
+        </nav> 
+        <br><br>
+        <h5>{{ item }}</h5>
+
+        <h5>User who added this product/item to their wish list:</h5>
+        <!-- append user that joined trip -->
+        <p>Some poor soul</p>
+
+    </div>	
+</main>
+
+{% endblock %}

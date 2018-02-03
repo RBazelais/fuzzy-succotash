@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{%  block content %}
+
+<main>
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Registration</h2>
+            <form action="/process" method="POST">
+                {% csrf_token %}
+                <div class="form-group">    
+                    <label for="name">Name</label>
+                    <input type="text" name="name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password"> 
+                </div>
+                <div class="form-group">
+                    <label for="confirm">Confirm Password</label>
+                    <input type="password" name="confirm">
+                </div>
+                <input type="submit" value='Register'>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <h2>Login</h2>
+            <form action="/login" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password">
+                </div>
+                <input type="submit" value='Login'>
+            </form>
+        </div>
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    </div>
+</main>
+{% endblock %}
+                <!-- <div class="form-group">    
+                    <label for="username">Username</label>
+                    <input type="text" name="username">
+                </div> -->
+   
+                <!-- <div class="form-group">
+                    <label for="birthday">Birthday</label>
+                    <input type="date" name="birthday">
+                </div> -->
+                

@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{%  block content %}
+
+<main>
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
+            <a class="navbar-brand" href="#">Wishlist Dashboard</a>
+            <a href="#">Home</a>
+            <button type="submit" class="btn btn-outline-success my-2 my-sm-0">
+                <a href="/logout">Logout</a>
+            </button>
+        </nav> 
+        <h4>Hey {{ user.name }}</h4>
+        <br>
+        <h5>Your Wish List</h5>
+        <table class="table table-striped">
+            <tr>
+                <th>Item</th> 
+                <th>Posted By</th>
+                <th>Date Added</th>
+                <th>Action</th>
+            </tr>
+            {% for product in in_this_user %}
+            <tr>
+                <td>{{ product }} </td>
+                <td>{{ product.added_by }}</td>
+                <td>{{ product.created_at }}</td>
+                <td>
+                    <form action="/remove_item" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="added_by" value="{{ user.id }}">
+                        <input type="submit" value="Remove from my Wishlist">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+            
+        </table>
+        <br><br>
+        <h5>Other User's Wish List</h5>
+        <table class="table table-striped">
+            <tr>
+                <th>Item</th> 
+                <th>Posted By</th>
+                <th>Date Added</th>
+                <th>Action</th>
+            </tr>
+            <tr>
+                {% for product in not_this_user %}
+                <td>{{ product }} </td>
+                <td>{{ product.added_by }}</td>
+                <td>{{ product.created_at }}</td>
+                <td>
+                    <form action="/add_item" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="added_by" value="{{ user.id }}">
+                        <input type="submit" value="Add to my Wishlist">
+                    </form>
+                </td>
+                {% endfor %}
+            </tr>
+            <br>
+        </table>
+        <br><br>
+        <a href="create">Add Item</a>
+    </div>
+</main>
+
+{% endblock %}
